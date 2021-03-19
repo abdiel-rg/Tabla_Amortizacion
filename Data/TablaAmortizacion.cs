@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Tabla_Amortizacion.Data;
@@ -17,11 +18,20 @@ namespace Tabla_Amortizacion.Pages
 
         public TablaAmortizacion() { }
 
+        [Required]
+        [Range(double.Epsilon, double.MaxValue)]
         public double Monto { get; set; }
+
+        [Required]
+        [Range(double.Epsilon, double.MaxValue)]
         public double TasaAnual { get; set; }
+
+        [Required]
+        [Range(double.Epsilon, double.MaxValue)]
         public int PlazoAnios { get; set; }
 
         public double TasaMensual => TasaAnual / 100 / 12;
+
         public int PlazoMeses => PlazoAnios * 12;
 
         public double CuotaProg => Monto * (TasaMensual * Math.Pow(1 + TasaMensual, PlazoMeses) / (Math.Pow(1 + TasaMensual, PlazoMeses) - 1));
