@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using Tabla_Amortizacion.Data
 
-<EditForm Model="tabla" class="form">
+<EditForm Model="tabla" class="form" OnValidSubmit="() => valid = true" OnInvalidSubmit="() => valid = false">
 
     <div class="container-fluid">
 
@@ -34,6 +34,38 @@
     </div>
 
 </EditForm>
+
+@if (valid)
+{
+    <table class="table mt-5">
+        <thead>
+            <tr>
+                <th scope="col">Pago</th>
+                <th scope="col">Balance Inicial</th>
+                <th scope="col">Cuota Fija</th>
+                <th scope="col">Intereses</th>
+                <th scope="col">Abono Capital</th>
+                <th scope="col">Balance Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in tabla.Pagos())
+            {
+                <tr>
+                    <th scope="row">@p.Numero</th>
+                    <td>@p.BalanceInicial.ToString("C2")</td>
+                    <td>@tabla.CuotaProg.ToString("C2")</td>
+                    <td>@p.Intereses.ToString("C2")</td>
+                    <td>@p.AbonoCapital.ToString("C2")</td>
+                    <td>@p.BalanceFinal.ToString("C2")</td>
+                </tr>
+            }
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+}
+
 
 @code
 {
