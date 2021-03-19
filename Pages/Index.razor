@@ -1,7 +1,43 @@
 ﻿@page "/"
+@using Tabla_Amortizacion.Data
 
-<h1>Hello, world!</h1>
+<EditForm Model="tabla" class="form">
 
-Welcome to your new app.
+    <div class="container-fluid">
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+        <h1>Tabla de Amortización</h1>
+
+
+        <div class="row">
+            <DataAnnotationsValidator />
+
+            <div class="col-md-12 col-lg-4 mb-4">
+                <label class="form-label">Monto</label>
+                <InputNumber @bind-Value="tabla.Monto" class="form-control" placeholder="1,000,000" />
+            </div>
+
+            <div class="col-md-12 col-lg-4 mb-4">
+                <label class="form-label">Tasa Anual</label>
+                <InputNumber @bind-Value="tabla.TasaAnual" class="form-control" placeholder="12.5%" />
+            </div>
+
+            <div class="col-md-12 col-lg-4 mb-4">
+                <label class="form-label">Plazo (en años)</label>
+                <InputNumber @bind-Value="tabla.PlazoAnios" class="form-control" placeholder="10" />
+            </div>
+
+        </div>
+
+        <div class="row">
+            <button class="btn btn-primary mx-auto">Procesar Datos</button>
+        </div>
+    </div>
+
+</EditForm>
+
+@code
+{
+    TablaAmortizacion tabla = new();
+
+    bool valid = false;
+}
