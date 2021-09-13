@@ -34,6 +34,11 @@ namespace Tabla_Amortizacion.Pages
 
         public int PlazoMeses => PlazoAnios * 12;
 
+        public (int Numero, double Diferencia) PuntoMedioPrestamo => Pagos()
+                    .Select(p => (p.Numero, Diferencia: Math.Abs(p.Intereses - p.AbonoCapital)))
+                    .OrderBy(p => p.Diferencia)
+                    .First();
+
         public double CuotaProg => Monto * (TasaMensual * Math.Pow(1 + TasaMensual, PlazoMeses) / (Math.Pow(1 + TasaMensual, PlazoMeses) - 1));
 
         public IEnumerable<Pago> Pagos()
