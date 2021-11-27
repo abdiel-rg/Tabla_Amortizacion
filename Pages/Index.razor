@@ -28,12 +28,7 @@
 
             <div class="col-md-12 col-lg-4 mb-4">
                 <label class="form-label">Plazo (en años)</label>
-                <InputSelect @bind-Value="tabla.PlazoAnios" class="form-control">
-                  @for(int i = 5; i <= 30; i += 5)
-                    {
-                        <option value="@i">@i</option>
-                    } 
-                </InputSelect>
+                <InputNumber @bind-Value="tabla.PlazoAnios" class="form-control" />
             </div>
 
         </div>
@@ -67,8 +62,8 @@
                     <th scope="row">@pago.Numero</th>
                     <td>@pago.BalanceInicial.ToString("C2")</td>
                     <td>@tabla.CuotaProg.ToString("C2")</td>
-                    <td style="color: @(pago.Numero < tabla.PuntoMedioPrestamo.Numero ? "red" : pago.Numero == tabla.PuntoMedioPrestamo.Numero ? "orange" : "green");">@pago.Intereses.ToString("C2")</td>
-                    <td style="color: @(pago.Numero < tabla.PuntoMedioPrestamo.Numero ? "red" : pago.Numero == tabla.PuntoMedioPrestamo.Numero ? "orange" : "green");">@pago.AbonoCapital.ToString("C2")</td>
+                    <td  style="color: @(pago.Numero <= tabla.PuntoMedioPrestamo.Numero ? "red" : pago.Numero == tabla.PuntoMedioPrestamo.Numero + 1 ? "orange" : "green");">@pago.Intereses.ToString("C2")</td>
+                    <td style="color: @(pago.Numero <= tabla.PuntoMedioPrestamo.Numero ? "red" : pago.Numero == tabla.PuntoMedioPrestamo.Numero + 1 ? "orange" : "green");">@pago.AbonoCapital.ToString("C2")</td>
                     <td>@pago.BalanceFinal.ToString("C2")</td>
                 </tr>
             }
